@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ética en Acción | Evaluación del manual</title>
+<meta name="description" content="Evalúa lo que aprendiste del manual Ética en Acción y de los 7 pilares del éxito.">
+<style>
+  :root {
+    --ink: #1e1b16;
+    --gold: #b08d3c;
+    --gold-light: #d9c48f;
+    --cream: #f6f1e7;
+    --paper: #fffdf8;
+    --text: #2b2823;
+    --muted: #6b6558;
+    --line: #ddd3be;
+    --ok: #2f6b3f;
+    --ok-bg: #e6f1e8;
+    --bad: #8f2d2d;
+    --bad-bg: #f6e4e2;
+    --serif: Georgia, "Times New Roman", serif;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, Calibri, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font-family: var(--sans); color: var(--text); background: var(--paper); line-height: 1.55; }
+  h1, h2, h3 { font-family: var(--serif); color: var(--ink); line-height: 1.2; margin: 0; }
+  a { color: inherit; }
+  button { font: inherit; cursor: pointer; }
+  :focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 0 20px; }
+
+  /* Navegación */
+  .nav { position: sticky; top: 0; z-index: 10; background: var(--ink); border-bottom: 3px solid var(--gold); }
+  .nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 54px; }
+  .brand { font-family: var(--serif); color: #fff; font-weight: 700; text-decoration: none; }
+  .nav ul { display: flex; gap: 20px; list-style: none; margin: 0; padding: 0; }
+  .nav a.link { color: var(--gold-light); text-decoration: none; font-size: .92rem; }
+  .nav a.link:hover { color: #fff; }
+
+  /* Portada */
+  .hero { background: var(--ink); color: #fff; padding: 64px 0 72px; }
+  .kicker { font-size: .75rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-light); margin: 0 0 14px; }
+  .hero h1 { color: #fff; font-size: clamp(2.2rem, 6vw, 3.6rem); }
+  .hero p.lead { max-width: 620px; color: #e8e2d4; font-size: 1.08rem; margin: 18px 0 30px; }
+  .btn { display: inline-block; border: 2px solid var(--gold); background: var(--gold); color: var(--ink); font-weight: 700; padding: 12px 22px; border-radius: 4px; text-decoration: none; }
+  .btn:hover { background: var(--gold-light); border-color: var(--gold-light); }
+  .btn.ghost { background: transparent; color: #fff; }
+  .btn.ghost:hover { background: rgba(255,255,255,.1); }
+  .btn.dark { background: var(--ink); border-color: var(--ink); color: #fff; }
+  .btn.dark:hover { background: #3a342b; border-color: #3a342b; }
+  .btn-row { display: flex; flex-wrap: wrap; gap: 12px; }
+  .meta { margin-top: 34px; display: flex; flex-wrap: wrap; gap: 8px 28px; font-size: .88rem; color: var(--gold-light); }
+
+  section { padding: 56px 0; }
+  section + section { border-top: 1px solid var(--line); }
+  .title-rule { border-bottom: 2px solid var(--gold); padding-bottom: 8px; margin-bottom: 8px; font-size: 1.7rem; }
+  .intro { color: var(--muted); max-width: 640px; margin: 10px 0 28px; }
+
+  /* Pilares */
+  .pillars { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+  .pillar { text-align: left; background: var(--cream); border: 0; border-top: 3px solid var(--gold); padding: 16px 18px; border-radius: 0 0 4px 4px; color: var(--text); width: 100%; }
+  .pillar:hover { background: #efe7d6; }
+  .pillar .num { font-family: var(--serif); font-size: 1.7rem; font-weight: 700; color: var(--gold); }
+  .pillar .name { display: block; font-family: var(--serif); font-size: 1.1rem; font-weight: 700; color: var(--ink); }
+  .pillar .hint { display: block; font-size: .8rem; color: var(--muted); margin-top: 2px; }
+  .pillar .more { display: none; margin-top: 12px; font-size: .92rem; border-top: 1px solid var(--line); padding-top: 10px; }
+  .pillar[aria-expanded="true"] .more { display: block; }
+  .pillar[aria-expanded="true"] .hint { display: none; }
+  .more b { color: var(--ink); }
+  .more p { margin: 0 0 6px; }
+
+  /* Evaluación */
+  .quiz-box { background: var(--cream); border-left: 5px solid var(--gold); padding: 24px; border-radius: 0 4px 4px 0; }
+  .progress { display: flex; gap: 4px; margin-bottom: 18px; }
+  .progress span { flex: 1; height: 6px; background: var(--line); border-radius: 3px; }
+  .progress .cur { background: var(--gold); }
+  .progress .right { background: var(--ok); }
+  .progress .wrong { background: var(--bad); }
+  .status { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px; font-size: .85rem; color: var(--muted); margin-bottom: 10px; }
+  .block { font-weight: 700; letter-spacing: .05em; text-transform: uppercase; font-size: .75rem; color: var(--gold); }
+  .q { font-family: var(--serif); font-size: 1.3rem; color: var(--ink); margin: 0 0 18px; }
+  .opts { display: grid; gap: 10px; }
+  .opt { text-align: left; background: #fff; border: 2px solid var(--line); border-radius: 4px; padding: 12px 14px; color: var(--text); }
+  .opt:hover:not(:disabled) { border-color: var(--gold); }
+  .opt:disabled { cursor: default; }
+  .opt.right { border-color: var(--ok); background: var(--ok-bg); }
+  .opt.wrong { border-color: var(--bad); background: var(--bad-bg); }
+  .feedback { margin-top: 16px; padding: 14px 16px; border-radius: 4px; background: #fff; border: 1px solid var(--line); }
+  .feedback strong { display: block; margin-bottom: 4px; }
+  .feedback.ok strong { color: var(--ok); }
+  .feedback.bad strong { color: var(--bad); }
+  .actions { margin-top: 16px; }
+  [hidden] { display: none !important; }
+
+  /* Resultado */
+  .score { font-family: var(--serif); font-size: 3rem; color: var(--ink); margin: 6px 0; }
+  .level { display: inline-block; background: var(--ink); color: var(--gold-light); font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; padding: 4px 10px; border-radius: 3px; }
+  .bands { font-size: .85rem; color: var(--muted); margin: 14px 0 0; }
+  .missed { margin: 22px 0 0; padding: 0; list-style: none; display: grid; gap: 12px; }
+  .missed li { background: #fff; border: 1px solid var(--line); border-left: 4px solid var(--bad); padding: 12px 14px; border-radius: 0 4px 4px 0; font-size: .93rem; }
+  .missed b { color: var(--ink); }
+
+  footer { background: var(--ink); color: var(--gold-light); padding: 26px 0; font-size: .85rem; border-top: 3px solid var(--gold); }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 20px; }
+
+  @media (max-width: 560px) {
+    .nav ul { gap: 14px; }
+    .quiz-box { padding: 18px; }
+    section { padding: 44px 0; }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#inicio">Ética en Acción</a>
+    <nav aria-label="Principal">
+      <ul>
+        <li><a class="link" href="#pilares">Los 7 pilares</a></li>
+        <li><a class="link" href="#evaluacion">Evaluación</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="hero" id="inicio">
+    <div class="wrap">
+      <p class="kicker">Manual de conducta profesional para el ambiente laboral</p>
+      <h1>Ética en Acción</h1>
+      <p class="lead">Repasa los siete pilares del éxito y responde 14 preguntas sobre las situaciones del manual. Cada respuesta te explica qué haría una persona íntegra en su trabajo.</p>
+      <div class="btn-row">
+        <a class="btn" href="#evaluacion">Empezar la evaluación</a>
+        <a class="btn ghost" href="#pilares">Repasar los 7 pilares</a>
+      </div>
+      <div class="meta">
+        <span>Mario Taracena</span>
+        <span>0901-23-9335</span>
+      </div>
+    </div>
+  </div>
+
+  <section id="pilares">
+    <div class="wrap">
+      <h2 class="title-rule">Los 7 pilares del éxito</h2>
+      <p class="intro">Según Bernie Torrence y Néstor Ochoa, cada pilar viene con un voto: una promesa personal que nombra un enemigo a resistir. Pulsa una tarjeta para ver el voto y cómo se nota en el trabajo.</p>
+      <div class="pillars" id="pillarGrid"></div>
+    </div>
+  </section>
+
+  <section id="evaluacion">
+    <div class="wrap">
+      <h2 class="title-rule">Evaluación</h2>
+      <p class="intro">Catorce preguntas en dos jornadas. Verás la respuesta correcta y su explicación después de cada una.</p>
+
+      <div class="quiz-box" id="quizBox">
+        <div id="quizStart">
+          <p style="margin-top:0">Jornada 1 cubre las situaciones y el propósito del manual. Jornada 2 cubre los siete pilares del libro.</p>
+          <button class="btn dark" id="startBtn" type="button">Comenzar</button>
+        </div>
+
+        <div id="quizRun" hidden>
+          <div class="progress" id="progress" aria-hidden="true"></div>
+          <div class="status">
+            <span class="block" id="blockName"></span>
+            <span id="counter"></span>
+          </div>
+          <h3 class="q" id="question" tabindex="-1"></h3>
+          <div class="opts" id="options"></div>
+          <div class="feedback" id="feedback" role="status" aria-live="polite" hidden></div>
+          <div class="actions"><button class="btn dark" id="nextBtn" type="button" hidden>Siguiente</button></div>
+        </div>
+
+        <div id="quizEnd" hidden>
+          <span class="level" id="levelTag"></span>
+          <div class="score" id="scoreText"></div>
+          <p id="levelMsg" style="margin:0"></p>
+          <p class="bands">Escala: 0 a 6 Por reforzar, 7 a 10 En desarrollo, 11 a 13 Consolidado, 14 Referente.</p>
+          <div id="missedWrap" hidden>
+            <h3 style="margin-top:22px;font-size:1.15rem">Para repasar</h3>
+            <ul class="missed" id="missedList"></ul>
+          </div>
+          <div class="btn-row" style="margin-top:22px">
+            <button class="btn dark" id="retryBtn" type="button">Intentar de nuevo</button>
+            <a class="btn" href="#pilares">Repasar los 7 pilares</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Ética en Acción | Boceto de manual</span>
+    <span>Fuente de los pilares: Bernie Torrence y Néstor Ochoa, Los 7 votos del éxito</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  var PILARES = [
+    { n: 1, name: 'Honestidad', voto: 'Ser honesto y resistir la tentación de mentir, engañar o robar.', trabajo: 'Decir la verdad aunque incomode, cumplir lo prometido y admitir un error antes de que lo descubra otra persona.' },
+    { n: 2, name: 'Generosidad', voto: 'Ser generoso y resistir la codicia.', trabajo: 'Compartir tiempo y conocimiento con el equipo sin esperar algo a cambio.' },
+    { n: 3, name: 'Trabajo duro', voto: 'Trabajar con esfuerzo y resistir la pereza.', trabajo: 'Terminar lo que se empieza, no dejar tareas para después y dar algo más de lo mínimo que se pide.' },
+    { n: 4, name: 'Humildad', voto: 'Ser humilde y resistir el orgullo.', trabajo: 'Reconocer lo que no se sabe, pedir ayuda y aceptar correcciones sin sentirlo como un ataque.' },
+    { n: 5, name: 'Planificación efectiva', voto: 'Planificar con anticipación y resistir la impulsividad.', trabajo: 'Fijar objetivos, escribir el plan y revisar el avance en lugar de reaccionar sobre la marcha.' },
+    { n: 6, name: 'Sentido común', voto: 'Actuar con sentido común y resistir la confusión.', trabajo: 'Distinguir lo correcto de lo incorrecto antes de decidir y escuchar antes de hablar.' },
+    { n: 7, name: 'Dominio propio', voto: 'Tener dominio propio y resistir el exceso.', trabajo: 'Cuidar las palabras y las emociones bajo presión, sobre todo durante un conflicto.' }
+  ];
+
+  var J1 = 'Jornada 1: el manual';
+  var J2 = 'Jornada 2: los 7 pilares';
+
+  // La primera opción de cada pregunta es la correcta; el orden se mezcla al mostrarla.
+  var QUESTIONS = [
+    { block: J1, q: 'Un proveedor te ofrece un regalo a cambio de favorecerlo. ¿Qué haces?',
+      options: ['Lo rechazas y avisas a tu jefe inmediato.', 'Lo aceptas si el regalo es de poco valor.', 'Lo aceptas y no dices nada para evitar problemas.', 'Lo rechazas, pero no se lo cuentas a nadie.'],
+      why: 'El manual indica rechazar el regalo y avisar a tu jefe inmediato. No se maneja solo ni en privado.' },
+    { block: J1, q: 'Detectas un error que afecta a un cliente y nadie más lo ha notado. ¿Qué haces?',
+      options: ['Lo reportas de inmediato y documentas qué pasó y cómo lo corregirás.', 'Esperas a ver si el cliente se da cuenta.', 'Lo corriges en silencio para no llamar la atención.', 'Se lo comentas solo a un compañero de confianza.'],
+      why: 'El error se reporta tan pronto se detecta, aunque nadie más lo haya visto, y se documenta el plan para corregirlo.' },
+    { block: J1, q: 'Un plazo ajustado te tienta a saltarte una revisión de calidad. ¿Cuándo debes decirlo?',
+      options: ['Antes de omitir el paso.', 'Después de entregar, si alguien pregunta.', 'Nunca, si el resultado salió bien.', 'Solo si el cliente reclama.'],
+      why: 'La regla del manual es decirlo antes de omitir la revisión, no después.' },
+    { block: J1, q: 'Ves que un compañero recibe un comentario irrespetuoso. ¿Qué haces?',
+      options: ['Hablas en privado con quien lo dijo, o lo reportas si se repite.', 'Lo dejas pasar porque no es contigo.', 'Respondes con otro comentario irrespetuoso.', 'Lo comentas con el resto del equipo sin hablar con nadie más.'],
+      why: 'No se deja pasar. Se habla en privado con quien lo dijo y, si se repite, se reporta.' },
+    { block: J1, q: '¿Qué valores busca traducir el manual en decisiones concretas?',
+      options: ['Integridad, responsabilidad y respeto.', 'Puntualidad, ahorro y competencia.', 'Lealtad, ambición y rapidez.', 'Disciplina, prestigio y obediencia.'],
+      why: 'El objetivo general del manual es traducir integridad, responsabilidad y respeto en decisiones del trabajo diario.' },
+    { block: J1, q: '¿Cómo está organizado cada capítulo del manual?',
+      options: ['Parte de un caso corto y sigue con pasos claros a seguir.', 'Empieza con una definición filosófica de la ética.', 'Presenta una lista de sanciones por cada falta.', 'Reúne citas de autores sobre cada valor.'],
+      why: 'Cada capítulo arranca con un caso corto seguido de pasos concretos, en vez de principios abstractos.' },
+
+    { block: J2, q: '¿Qué enemigo resiste el voto de generosidad?',
+      options: ['La codicia.', 'La pereza.', 'El orgullo.', 'La impulsividad.'],
+      why: 'El segundo pilar es la generosidad y su voto se opone a la codicia.' },
+    { block: J2, q: '¿Qué enemigo resiste el voto del trabajo duro?',
+      options: ['La pereza.', 'El exceso.', 'La confusión.', 'La codicia.'],
+      why: 'El voto del trabajo duro compromete a esforzarse y resistir la pereza.' },
+    { block: J2, q: '¿Qué voto compromete a resistir la tentación de mentir, engañar o robar?',
+      options: ['Honestidad.', 'Humildad.', 'Sentido común.', 'Dominio propio.'],
+      why: 'Es el voto de la honestidad, el primero de los siete pilares.' },
+    { block: J2, q: 'El pilar de la planificación efectiva se opone a...',
+      options: ['La impulsividad.', 'El orgullo.', 'La pereza.', 'La codicia.'],
+      why: 'Planificar con anticipación es la respuesta a la impulsividad: fijar objetivos, escribir el plan y revisar el avance.' },
+    { block: J2, q: 'Escribes tu plan de la semana y el viernes revisas cuánto avanzaste. ¿Qué pilar practicas?',
+      options: ['Planificación efectiva.', 'Generosidad.', 'Humildad.', 'Honestidad.'],
+      why: 'Fijar objetivos, escribir el plan y evaluar el avance son los hábitos de quien planifica con eficacia.' },
+    { block: J2, q: 'Reconoces que no dominas un tema y le pides ayuda a un compañero. ¿Qué pilar practicas?',
+      options: ['Humildad.', 'Dominio propio.', 'Trabajo duro.', 'Planificación efectiva.'],
+      why: 'La humildad es ser consciente de las propias limitaciones. No es falta de autoestima: permite mejorar.' },
+    { block: J2, q: 'En una reunión tensa cuidas tus palabras y no respondes con enojo. ¿Qué pilar practicas?',
+      options: ['Dominio propio.', 'Generosidad.', 'Sentido común.', 'Trabajo duro.'],
+      why: 'El dominio propio implica controlar las palabras y las emociones, y su enemigo es el exceso.' },
+    { block: J2, q: '¿Quiénes son los autores de Los 7 votos del éxito?',
+      options: ['Bernie Torrence y Néstor Ochoa.', 'Stephen Covey y Robin Sharma.', 'Jim Collins y Simon Sinek.', 'Napoleon Hill y Dale Carnegie.'],
+      why: 'El libro es de Bernie Torrence y Néstor Ochoa.' }
+  ];
+
+  var LEVELS = [
+    { min: 14, name: 'Referente', msg: 'Respondiste todo bien. Ya puedes usar el manual como material de inducción para otros.' },
+    { min: 11, name: 'Consolidado', msg: 'Dominas casi todo. Revisa los puntos de abajo para cerrar los detalles.' },
+    { min: 7, name: 'En desarrollo', msg: 'Vas por buen camino. Repasa las situaciones y los pilares que fallaste y vuelve a intentarlo.' },
+    { min: 0, name: 'Por reforzar', msg: 'Conviene releer el manual y los siete pilares antes de otro intento.' }
+  ];
+
+  var $ = function (id) { return document.getElementById(id); };
+  var state = { i: 0, score: 0, answered: false, results: [], order: [] };
+
+  // ----- Pilares -----
+  var grid = $('pillarGrid');
+  PILARES.forEach(function (p) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'pillar';
+    b.setAttribute('aria-expanded', 'false');
+    b.innerHTML =
+      '<span class="num">' + p.n + '</span> <span class="name">' + p.name + '</span>' +
+      '<span class="hint">Ver el voto</span>' +
+      '<span class="more"><p><b>Voto:</b> ' + p.voto + '</p><p><b>En el trabajo:</b> ' + p.trabajo + '</p></span>';
+    b.addEventListener('click', function () {
+      b.setAttribute('aria-expanded', b.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
+    });
+    grid.appendChild(b);
+  });
+
+  // ----- Evaluación -----
+  function shuffle(a) {
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+
+  function drawProgress() {
+    var box = $('progress');
+    box.innerHTML = '';
+    QUESTIONS.forEach(function (_, k) {
+      var s = document.createElement('span');
+      if (state.results[k] === true) s.className = 'right';
+      else if (state.results[k] === false) s.className = 'wrong';
+      else if (k === state.i) s.className = 'cur';
+      box.appendChild(s);
+    });
+  }
+
+  function show(id, on) { $(id).hidden = !on; }
+
+  function start() {
+    state = { i: 0, score: 0, answered: false, results: [], order: [] };
+    show('quizStart', false); show('quizEnd', false); show('quizRun', true);
+    render();
+  }
+
+  function render() {
+    var item = QUESTIONS[state.i];
+    state.answered = false;
+    $('blockName').textContent = item.block;
+    $('counter').textContent = 'Pregunta ' + (state.i + 1) + ' de ' + QUESTIONS.length + ' | Aciertos: ' + state.score;
+    $('question').textContent = item.q;
+    $('feedback').hidden = true;
+    $('nextBtn').hidden = true;
+    drawProgress();
+
+    var idx = shuffle(item.options.map(function (_, k) { return k; }));
+    var box = $('options');
+    box.innerHTML = '';
+    idx.forEach(function (k) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'opt';
+      b.textContent = item.options[k];
+      b.dataset.k = k;
+      b.addEventListener('click', function () { answer(k, b); });
+      box.appendChild(b);
+    });
+    $('question').focus({ preventScroll: true });
+  }
+
+  function answer(k, btn) {
+    if (state.answered) return;
+    state.answered = true;
+    var item = QUESTIONS[state.i];
+    var ok = (k === 0);
+    state.results[state.i] = ok;
+    if (ok) state.score++;
+
+    Array.prototype.forEach.call($('options').children, function (b) {
+      b.disabled = true;
+      if (Number(b.dataset.k) === 0) b.classList.add('right');
+    });
+    if (!ok) btn.classList.add('wrong');
+
+    var fb = $('feedback');
+    fb.className = 'feedback ' + (ok ? 'ok' : 'bad');
+    fb.innerHTML = '<strong>' + (ok ? 'Correcto' : 'Incorrecto') + '</strong>' + item.why;
+    fb.hidden = false;
+
+    $('counter').textContent = 'Pregunta ' + (state.i + 1) + ' de ' + QUESTIONS.length + ' | Aciertos: ' + state.score;
+    drawProgress();
+
+    var next = $('nextBtn');
+    next.textContent = (state.i === QUESTIONS.length - 1) ? 'Ver resultado' : 'Siguiente';
+    next.hidden = false;
+    next.focus();
+  }
+
+  function next() {
+    if (state.i < QUESTIONS.length - 1) { state.i++; render(); }
+    else finish();
+  }
+
+  function finish() {
+    show('quizRun', false); show('quizEnd', true);
+    var total = QUESTIONS.length;
+    var level = LEVELS.filter(function (l) { return state.score >= l.min; })[0];
+    $('levelTag').textContent = level.name;
+    $('scoreText').textContent = state.score + ' / ' + total;
+    $('levelMsg').textContent = level.msg;
+
+    var list = $('missedList');
+    list.innerHTML = '';
+    var any = false;
+    QUESTIONS.forEach(function (item, k) {
+      if (state.results[k] === false) {
+        any = true;
+        var li = document.createElement('li');
+        li.innerHTML = '<b></b><br><span></span><br><span></span>';
+        li.children[0].textContent = item.q;
+        li.children[2].textContent = 'Respuesta correcta: ' + item.options[0];
+        li.children[4].textContent = item.why;
+        list.appendChild(li);
+      }
+    });
+    $('missedWrap').hidden = !any;
+    $('quizEnd').scrollIntoView({ block: 'nearest' });
+  }
+
+  $('startBtn').addEventListener('click', start);
+  $('nextBtn').addEventListener('click', next);
+  $('retryBtn').addEventListener('click', start);
+})();
+</script>
+</body>
+</html>
