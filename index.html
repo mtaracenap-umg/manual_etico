@@ -6,116 +6,7 @@
 <title>Ética en Acción | Manual interactivo</title>
 <meta name="description" content="Repasa los siete valores del trabajo profesional y evalúa lo que aprendiste.">
 <meta name="theme-color" content="#ffd66b">
-<style>
-  :root {
-    --ink: #2b2a33;
-    --bg: #f7f5f0;
-    --card: #ffffff;
-    --muted: #5d5a66;
-    --yellow: #ffd66b;
-    --pink: #f7b6c8;
-    --blue: #b9c6f7;
-    --green: #b8dc8b;
-    --teal: #c5e8ec;
-    --lilac: #d9c9f2;
-    --orange: #ffc49b;
-    --ok: #2f6b3f;
-    --ok-bg: #e2f0d4;
-    --bad: #8f2d2d;
-    --bad-bg: #fbe0e4;
-    --head: "Trebuchet MS", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
-    --body: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-  }
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body { margin: 0; font-family: var(--body); color: var(--ink); background: var(--bg); line-height: 1.55; }
-  h1, h2, h3 { font-family: var(--head); line-height: 1.15; margin: 0; }
-  a { color: inherit; }
-  button, input, select, textarea { font: inherit; color: inherit; }
-  button { cursor: pointer; }
-  :focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
-  [hidden] { display: none !important; }
-  .wrap { max-width: 960px; margin: 0 auto; padding: 0 20px; }
-
-  /* Componentes */
-  .card { background: var(--card); border: 2px solid var(--ink); border-radius: 6px; box-shadow: 6px 6px 0 var(--c, var(--yellow)); padding: 20px; }
-  .pill { display: inline-block; background: var(--yellow); border: 2px solid var(--ink); border-radius: 999px; padding: 2px 14px; font-weight: 700; font-size: .9rem; }
-  .tag { display: inline-block; background: var(--c, var(--yellow)); border: 2px solid var(--ink); border-radius: 4px; padding: 2px 10px; font-family: var(--head); font-weight: 700; text-transform: uppercase; letter-spacing: .04em; font-size: .85rem; }
-  .btn { display: inline-block; text-decoration: none; background: var(--ink); color: #fff; border: 2px solid var(--ink); border-radius: 6px; padding: 11px 20px; font-weight: 700; box-shadow: 4px 4px 0 var(--c, var(--yellow)); }
-  .btn:hover { transform: translate(-1px, -1px); box-shadow: 5px 5px 0 var(--c, var(--yellow)); }
-  .btn.light { background: #fff; color: var(--ink); }
-  .btn-row { display: flex; flex-wrap: wrap; gap: 14px; }
-  .section-title { display: inline-block; font-size: clamp(1.5rem, 4vw, 2rem); text-transform: uppercase; letter-spacing: .02em; background: var(--c, var(--teal)); border: 2px solid var(--ink); border-radius: 4px; padding: 6px 16px; box-shadow: 5px 5px 0 var(--ink); }
-  .intro { max-width: 640px; color: var(--muted); margin: 18px 0 26px; }
-  section { padding: 54px 0 12px; }
-
-  /* Navegación */
-  .nav { position: sticky; top: 0; z-index: 10; background: var(--yellow); border-bottom: 2px solid var(--ink); }
-  .nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 14px; min-height: 52px; flex-wrap: wrap; }
-  .brand { font-family: var(--head); font-weight: 800; text-decoration: none; text-transform: uppercase; letter-spacing: .04em; }
-  .nav ul { display: flex; flex-wrap: wrap; gap: 6px 18px; list-style: none; margin: 0; padding: 0; }
-  .nav a.link { text-decoration: none; font-weight: 600; font-size: .92rem; }
-  .nav a.link:hover { text-decoration: underline; text-underline-offset: 4px; }
-
-  /* Portada */
-  .hero { text-align: center; padding: 52px 0 40px; }
-  .hero .course { color: var(--muted); font-size: .92rem; margin: 0 0 10px; }
-  .hero h1 { font-size: clamp(2.6rem, 9vw, 5rem); text-transform: uppercase; letter-spacing: .01em; margin: 18px 0 6px; }
-  .hero h1 span { background: linear-gradient(transparent 62%, var(--yellow) 62%, var(--yellow) 90%, transparent 90%); padding: 0 8px; }
-  .hero .lead { max-width: 600px; margin: 14px auto 28px; font-size: 1.08rem; color: var(--muted); }
-  .hero .btn-row { justify-content: center; }
-
-  /* Por qué elegirlo */
-  .grid3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
-  .why .card h3 { font-size: 1.05rem; margin: 10px 0 6px; }
-  .why .card p { margin: 0; font-size: .95rem; }
-  .why .n { font-family: var(--head); font-size: 1.8rem; font-weight: 800; }
-
-  /* Valores */
-  .tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 26px; }
-  .tab { background: #fff; border: 2px solid var(--ink); border-radius: 6px; padding: 9px 18px; font-family: var(--head); font-weight: 700; }
-  .tab[aria-selected="true"] { background: var(--c); box-shadow: 4px 4px 0 var(--ink); }
-  .value h3 { font-size: 1.7rem; margin: 10px 0 4px; }
-  .value .big { font-size: 1.08rem; margin: 0 0 18px; }
-  .value dl { display: grid; gap: 14px; margin: 0; }
-  .value dt { font-family: var(--head); font-weight: 700; text-transform: uppercase; letter-spacing: .05em; font-size: .78rem; color: var(--muted); }
-  .value dd { margin: 2px 0 0; }
-
-  /* Situaciones */
-  .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
-  .sit h3 { font-size: 1.1rem; margin: 0 0 8px; }
-  .sit p { margin: 0; font-size: .95rem; }
-
-  /* Evaluación */
-  .progress { display: flex; gap: 4px; margin-bottom: 16px; }
-  .progress span { flex: 1; height: 8px; background: #e6e2d8; border: 1px solid var(--ink); border-radius: 2px; }
-  .progress .cur { background: var(--yellow); }
-  .progress .right { background: var(--green); }
-  .progress .wrong { background: var(--pink); }
-  .status { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px; font-size: .88rem; color: var(--muted); margin-bottom: 10px; }
-  .q { font-size: 1.35rem; margin: 0 0 18px; }
-  .opts { display: grid; gap: 10px; }
-  .opt { text-align: left; background: #fff; border: 2px solid var(--ink); border-radius: 6px; padding: 12px 14px; }
-  .opt:hover:not(:disabled) { background: #fff7dc; }
-  .opt:disabled { cursor: default; }
-  .opt.right { background: var(--ok-bg); border-color: var(--ok); }
-  .opt.wrong { background: var(--bad-bg); border-color: var(--bad); }
-  .feedback { margin-top: 16px; padding: 14px 16px; border: 2px solid var(--ink); border-radius: 6px; background: var(--teal); }
-  .feedback strong { display: block; margin-bottom: 2px; }
-  .feedback.ok strong { color: var(--ok); }
-  .feedback.bad strong { color: var(--bad); }
-  .actions { margin-top: 18px; }
-  .score { font-family: var(--head); font-size: 3.4rem; font-weight: 800; margin: 8px 0 2px; }
-  .bands { font-size: .85rem; color: var(--muted); margin: 14px 0 0; }
-  .missed { margin: 8px 0 0; padding: 0; list-style: none; display: grid; gap: 12px; }
-  .missed li { background: #fff; border: 2px solid var(--ink); border-left: 8px solid var(--pink); border-radius: 4px; padding: 12px 14px; font-size: .93rem; }
-
-  footer { margin-top: 56px; background: var(--ink); color: #f3efe4; padding: 24px 0; font-size: .88rem; }
-  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 20px; }
-
-  @media (max-width: 560px) { .card { padding: 16px; } section { padding-top: 44px; } }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn:hover { transform: none; } }
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -140,25 +31,25 @@
     <p class="lead">Un manual de bolsillo para decidir bien en el trabajo. Repasa los siete valores y evalúa lo que aprendiste.</p>
     <div class="btn-row">
       <a class="btn" href="#evaluacion">Empezar la evaluación</a>
-      <a class="btn light" href="#valores" style="--c: var(--pink)">Repasar los valores</a>
+      <a class="btn light c-pink" href="#valores">Repasar los valores</a>
     </div>
   </div>
 
   <section class="why" id="por-que">
     <div class="wrap">
-      <h2 class="section-title" style="--c: var(--teal)">¿Por qué elegirlo?</h2>
+      <h2 class="section-title c-teal">¿Por qué elegirlo?</h2>
       <p class="intro">El manual da respuestas para el día a día, no solo principios generales.</p>
       <div class="grid3">
-        <div class="card" style="--c: var(--yellow)"><span class="n">01</span><h3>Situaciones concretas</h3><p>Responde a lo que pasa en la oficina: un regalo de un proveedor, un error, un plazo, una corrección, una agenda saturada, un cliente molesto.</p></div>
-        <div class="card" style="--c: var(--pink)"><span class="n">02</span><h3>Material de inducción</h3><p>Sirve para que el personal nuevo conozca cómo se actúa desde el primer día.</p></div>
-        <div class="card" style="--c: var(--blue)"><span class="n">03</span><h3>Decisiones propias</h3><p>Cada colaborador puede resolver un dilema por su cuenta, sin esperar a que alguien más decida por él.</p></div>
+        <div class="card c-yellow"><span class="n">01</span><h3>Situaciones concretas</h3><p>Responde a lo que pasa en la oficina: un regalo de un proveedor, un error, una corrección, una agenda saturada, un cliente molesto.</p></div>
+        <div class="card c-pink"><span class="n">02</span><h3>Material de inducción</h3><p>Sirve para que el personal nuevo conozca cómo se actúa desde el primer día.</p></div>
+        <div class="card c-blue"><span class="n">03</span><h3>Decisiones propias</h3><p>Cada colaborador puede resolver un dilema por su cuenta, sin esperar a que alguien más decida por él.</p></div>
       </div>
     </div>
   </section>
 
   <section id="valores">
     <div class="wrap">
-      <h2 class="section-title" style="--c: var(--green)">Siete valores</h2>
+      <h2 class="section-title c-green">Siete valores</h2>
       <p class="intro">Antes de cualquier regla hay una base. Estos siete valores, los 7 votos del manual, sostienen la mayoría de sus decisiones. Elige uno para leerlo.</p>
       <div class="tabs" role="tablist" aria-label="Valores" id="tabs"></div>
       <div class="card value" id="valueCard" role="tabpanel" tabindex="0"></div>
@@ -167,28 +58,27 @@
 
   <section id="situaciones">
     <div class="wrap">
-      <h2 class="section-title" style="--c: var(--blue)">Situaciones del manual</h2>
-      <p class="intro">Siete casos de muestra. Léelos antes de la evaluación.</p>
+      <h2 class="section-title c-blue">Situaciones del manual</h2>
+      <p class="intro">Seis casos de muestra. Léelos antes de la evaluación.</p>
       <div class="grid2">
-        <div class="card sit" style="--c: var(--yellow)"><h3>Conflicto de interés</h3><p>Si un proveedor te ofrece un regalo o beneficio a cambio de favorecerlo, recházalo y avisa a tu jefe inmediato. No lo manejes solo ni en privado.</p></div>
-        <div class="card sit" style="--c: var(--pink)"><h3>Un error que afecta a un cliente</h3><p>Repórtalo tan pronto lo detectes, aunque nadie más lo haya notado. Documenta qué pasó y qué harás para corregirlo.</p></div>
-        <div class="card sit" style="--c: var(--teal)"><h3>Presión de tiempos</h3><p>Si un plazo ajustado te tienta a saltarte una revisión de calidad, dilo antes de omitir el paso, no después.</p></div>
-        <div class="card sit" style="--c: var(--green)"><h3>Trato entre colegas</h3><p>Si ves que alguien recibe un comentario irrespetuoso, no lo dejes pasar. Habla en privado con quien lo dijo, o repórtalo si se repite.</p></div>
-        <div class="card sit" style="--c: var(--blue)"><h3>Te corrigen frente al equipo</h3><p>Si un colega señala un error en tu trabajo, escucha sin ponerte a la defensiva, agradece la observación, verifica si tiene razón y corrige. Si la idea que mejoró tu trabajo fue de otra persona, reconócelo.</p></div>
-        <div class="card sit" style="--c: var(--lilac)"><h3>Una agenda saturada</h3><p>Si tienes varias entregas a la vez y sabes que una no llegará, ordénalas por importancia y fecha, y avisa en cuanto lo detectes con una nueva fecha propuesta. No esperes al día de la entrega.</p></div>
-        <div class="card sit" style="--c: var(--orange)"><h3>Un cliente molesto</h3><p>Si recibes un mensaje agresivo, no respondas en caliente. Tómate un momento, responde con hechos y en tono respetuoso, y enfócate en resolver el problema. Si hay insultos o amenazas, escálalo a tu jefe.</p></div>
+        <div class="card sit c-yellow"><h3>Conflicto de interés</h3><p>Si un proveedor te ofrece un regalo o beneficio a cambio de favorecerlo, recházalo y avisa a tu jefe inmediato. No lo manejes solo ni en privado.</p></div>
+        <div class="card sit c-pink"><h3>Un error que afecta a un cliente</h3><p>Repórtalo tan pronto lo detectes, aunque nadie más lo haya notado. Documenta qué pasó y qué harás para corregirlo.</p></div>
+        <div class="card sit c-green"><h3>Trato entre colegas</h3><p>Si ves que alguien recibe un comentario irrespetuoso, no lo dejes pasar. Habla en privado con quien lo dijo, o repórtalo si se repite.</p></div>
+        <div class="card sit c-blue"><h3>Te corrigen frente al equipo</h3><p>Si un colega señala un error en tu trabajo, escucha sin ponerte a la defensiva, agradece la observación, verifica si tiene razón y corrige. Si la idea que mejoró tu trabajo fue de otra persona, reconócelo.</p></div>
+        <div class="card sit c-lilac"><h3>Una agenda saturada</h3><p>Si tienes varias entregas a la vez y sabes que una no llegará, ordénalas por importancia y fecha, y avisa en cuanto lo detectes con una nueva fecha propuesta. No esperes al día de la entrega.</p></div>
+        <div class="card sit c-orange"><h3>Un cliente molesto</h3><p>Si recibes un mensaje agresivo, no respondas en caliente. Tómate un momento, responde con hechos y en tono respetuoso, y enfócate en resolver el problema. Si hay insultos o amenazas, escálalo a tu jefe.</p></div>
       </div>
     </div>
   </section>
 
   <section id="evaluacion">
     <div class="wrap">
-      <h2 class="section-title" style="--c: var(--yellow)">Evaluación</h2>
-      <p class="intro"><span id="quizCount">Veintitrés preguntas</span> en tres jornadas. Después de cada respuesta verás cuál era la correcta y por qué.</p>
+      <h2 class="section-title c-yellow">Evaluación</h2>
+      <p class="intro">Veintidós preguntas en tres jornadas. Después de cada respuesta verás cuál era la correcta y por qué.</p>
 
-      <div class="card" style="--c: var(--pink)" id="quizBox">
+      <div class="card c-pink" id="quizBox">
         <div id="quizStart">
-          <p style="margin-top:0">La jornada 1 cubre las siete situaciones y el propósito del manual. La jornada 2 cubre honestidad, generosidad y trabajo duro. La jornada 3 cubre humildad, planificación efectiva, sentido común y dominio propio.</p>
+          <p class="flush-top">La jornada 1 cubre las seis situaciones y el propósito del manual. La jornada 2 cubre honestidad, generosidad y trabajo duro. La jornada 3 cubre humildad, planificación efectiva, sentido común y dominio propio.</p>
           <button class="btn" id="startBtn" type="button">Comenzar</button>
         </div>
 
@@ -205,17 +95,17 @@
         </div>
 
         <div id="quizEnd" hidden>
-          <span class="tag" id="levelTag" style="--c: var(--green)"></span>
+          <span class="tag c-green" id="levelTag"></span>
           <div class="score" id="scoreText"></div>
-          <p id="levelMsg" style="margin:0"></p>
+          <p id="levelMsg" class="flush"></p>
           <p class="bands" id="bands"></p>
           <div id="missedWrap" hidden>
-            <h3 style="margin:22px 0 10px;font-size:1.15rem">Para repasar</h3>
+            <h3 class="review-title">Para repasar</h3>
             <ul class="missed" id="missedList"></ul>
           </div>
-          <div class="btn-row" style="margin-top:24px">
+          <div class="btn-row end-actions">
             <button class="btn" id="retryBtn" type="button">Intentar de nuevo</button>
-            <a class="btn light" href="#valores" style="--c: var(--lilac)">Repasar los valores</a>
+            <a class="btn light c-lilac" href="#valores">Repasar los valores</a>
           </div>
         </div>
       </div>
@@ -235,31 +125,31 @@
   'use strict';
 
   var VALORES = [
-    { id: 'honestidad', name: 'Honestidad', color: 'var(--yellow)',
+    { id: 'honestidad', name: 'Honestidad', color: 'yellow',
       lead: 'Decir la verdad y actuar de forma coherente con lo que se dice, incluso cuando no conviene.',
       trabajo: 'Reportar un error antes de que lo encuentre otra persona, cumplir lo que se promete y rechazar beneficios a cambio de favores.',
       debilita: 'Las mentiras pequeñas y ocultar información incómoda para evitar problemas.' },
-    { id: 'generosidad', name: 'Generosidad', color: 'var(--pink)',
+    { id: 'generosidad', name: 'Generosidad', color: 'pink',
       lead: 'Compartir tiempo, conocimiento o apoyo con los demás sin esperar algo a cambio.',
       trabajo: 'Explicar un proceso a un compañero nuevo, ofrecer ayuda cuando el equipo está sobrecargado y reconocer el trabajo de otros.',
       debilita: 'El egoísmo y guardarse información para parecer indispensable.' },
-    { id: 'trabajo-duro', name: 'Trabajo duro', color: 'var(--green)',
+    { id: 'trabajo-duro', name: 'Trabajo duro', color: 'green',
       lead: 'Esforzarse de forma constante y terminar lo que se empieza, aunque nadie lo esté revisando.',
       trabajo: 'Cumplir plazos, completar las revisiones de calidad y buscar cómo mejorar una tarea en vez de conformarse con que pase.',
       debilita: 'Dejar las cosas para después y hacer solo lo mínimo.' },
-    { id: 'humildad', name: 'Humildad', color: 'var(--blue)',
+    { id: 'humildad', name: 'Humildad', color: 'blue',
       lead: 'Reconocer lo que no sabes, aceptar correcciones y valorar el aporte de los demás sin necesidad de destacar.',
       trabajo: 'Pedir ayuda cuando no dominas algo, recibir una crítica sin ponerte a la defensiva y dar crédito a quien aportó una idea.',
       debilita: 'El ego, creer que siempre tienes la razón y culpar a otros para no admitir un error.' },
-    { id: 'planificacion', name: 'Planificación efectiva', color: 'var(--teal)',
+    { id: 'planificacion', name: 'Planificación efectiva', color: 'teal',
       lead: 'Organizar el tiempo y los recursos antes de actuar, con metas claras y prioridades definidas.',
       trabajo: 'Dividir un proyecto en pasos con fechas, ordenar los pendientes por importancia y avisar con anticipación si un plazo está en riesgo.',
       debilita: 'Improvisar todo, aceptar compromisos sin revisar la agenda y vivir apagando incendios.' },
-    { id: 'sentido-comun', name: 'Sentido común', color: 'var(--lilac)',
+    { id: 'sentido-comun', name: 'Sentido común', color: 'lilac',
       lead: 'Juzgar cada situación con prudencia, usando la experiencia y pensando en las consecuencias antes de actuar.',
       trabajo: 'Preguntar cuando una instrucción no tiene lógica, cuidar la información confidencial y buscar la solución sencilla que resuelve el problema.',
       debilita: 'Actuar por impulso, aplicar instrucciones sin pensar en el resultado e ignorar señales claras de riesgo.' },
-    { id: 'dominio-propio', name: 'Dominio propio', color: 'var(--orange)',
+    { id: 'dominio-propio', name: 'Dominio propio', color: 'orange',
       lead: 'Controlar las emociones, los impulsos y las reacciones, sobre todo bajo presión.',
       trabajo: 'No responder en caliente un mensaje que molesta, mantener la calma ante un cliente enojado y evitar distracciones durante una tarea importante.',
       debilita: 'Reaccionar con enojo, hablar sin pensar y ceder a cada impulso del momento.' }
@@ -277,9 +167,6 @@
     { block: J1, q: 'Detectas un error que afecta a un cliente y nadie más lo ha notado. ¿Qué haces?',
       options: ['Lo reportas de inmediato y documentas qué pasó y cómo lo corregirás.', 'Esperas a ver si el cliente se da cuenta.', 'Lo corriges en silencio para no llamar la atención.', 'Se lo comentas solo a un compañero de confianza.'],
       why: 'El error se reporta tan pronto se detecta, aunque nadie más lo haya visto, y se documenta el plan para corregirlo.' },
-    { block: J1, q: 'Un plazo ajustado te tienta a saltarte una revisión de calidad. ¿Cuándo debes decirlo?',
-      options: ['Antes de omitir el paso.', 'Después de entregar, si alguien pregunta.', 'Nunca, si el resultado salió bien.', 'Solo si el cliente reclama.'],
-      why: 'La regla del manual es decirlo antes de omitir la revisión, no después.' },
     { block: J1, q: 'Ves que un compañero recibe un comentario irrespetuoso. ¿Qué haces?',
       options: ['Hablas en privado con quien lo dijo, o lo reportas si se repite.', 'Lo dejas pasar porque no es contigo.', 'Respondes con otro comentario irrespetuoso.', 'Lo comentas con el resto del equipo sin hablar con nadie más.'],
       why: 'No se deja pasar. Se habla en privado con quien lo dijo y, si se repite, se reporta.' },
@@ -345,7 +232,7 @@
   ];
 
   var BLOCK_COLORS = {};
-  BLOCK_COLORS[J1] = 'var(--blue)'; BLOCK_COLORS[J2] = 'var(--green)'; BLOCK_COLORS[J3] = 'var(--orange)';
+  BLOCK_COLORS[J1] = 'blue'; BLOCK_COLORS[J2] = 'green'; BLOCK_COLORS[J3] = 'orange';
 
   // Niveles por porcentaje de aciertos, para que la escala se ajuste si cambia el número de preguntas.
   var TOTAL = QUESTIONS.length;
@@ -364,10 +251,10 @@
   function showValue(i) {
     var v = VALORES[i];
     tabEls.forEach(function (t, k) { t.setAttribute('aria-selected', k === i ? 'true' : 'false'); t.tabIndex = k === i ? 0 : -1; });
-    card.style.setProperty('--c', v.color);
+    card.className = 'card value c-' + v.color;
     card.setAttribute('aria-labelledby', 'tab-' + v.id);
     card.innerHTML =
-      '<span class="tag" style="--c:' + v.color + '">Valor ' + (i + 1) + ' de ' + VALORES.length + '</span>' +
+      '<span class="tag c-' + v.color + '">Valor ' + (i + 1) + ' de ' + VALORES.length + '</span>' +
       '<h3>' + esc(v.name) + '</h3>' +
       '<p class="big">' + esc(v.lead) + '</p>' +
       '<dl><div><dt>En el trabajo</dt><dd>' + esc(v.trabajo) + '</dd></div>' +
@@ -375,8 +262,8 @@
   }
   VALORES.forEach(function (v, i) {
     var b = document.createElement('button');
-    b.type = 'button'; b.className = 'tab'; b.id = 'tab-' + v.id;
-    b.setAttribute('role', 'tab'); b.style.setProperty('--c', v.color);
+    b.type = 'button'; b.className = 'tab c-' + v.color; b.id = 'tab-' + v.id;
+    b.setAttribute('role', 'tab');
     b.textContent = v.name;
     b.addEventListener('click', function () { showValue(i); });
     b.addEventListener('keydown', function (e) {
@@ -420,7 +307,7 @@
     var item = QUESTIONS[state.i];
     state.answered = false;
     $('blockName').textContent = item.block;
-    $('blockName').style.setProperty('--c', BLOCK_COLORS[item.block]);
+    $('blockName').className = 'tag c-' + BLOCK_COLORS[item.block];
     counter();
     $('question').textContent = item.q;
     $('feedback').hidden = true; $('nextBtn').hidden = true;
